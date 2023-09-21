@@ -2,8 +2,9 @@ script_location=$(pwd)
 dnf install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y
 dnf install nodejs -y
 useradd roboshop
-mkdir /app 
+mkdir -p /app 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip 
+rm -rf /app/*
 cd /app 
 unzip /tmp/catalogue.zip
 cd /app 
