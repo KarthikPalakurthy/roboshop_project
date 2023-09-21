@@ -1,4 +1,4 @@
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+dnf install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y
 dnf install nodejs -y
 useradd roboshop
 mkdir /app 
