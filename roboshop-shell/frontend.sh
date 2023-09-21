@@ -1,4 +1,5 @@
-script_location = $(pwd)
+script_location=$(pwd)
+
 dnf install nginx -y 
 systemctl enable nginx 
 systemctl start nginx 
