@@ -1,4 +1,4 @@
-script_location = $(pwd)
+script_location=$(pwd)
 cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongodb.repo
 dnf install mongodb-org -y 
 systemctl enable mongod 
