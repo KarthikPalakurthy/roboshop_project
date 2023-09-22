@@ -63,5 +63,5 @@ dnf install mongodb-org-shell -y &>>${LOG}
 status_check
 
 print_steps "Updating mongo host address"
-mongo --host localhost </app/schema/catalogue.js &>>${LOG}
+mongo --host mongodb-dev.devpractice.online </app/schema/catalogue.js &>>${LOG}
 status_check
