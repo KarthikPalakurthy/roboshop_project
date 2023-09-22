@@ -8,13 +8,13 @@ print_steps "Installing NodeJS"
 dnf install nodejs -y &>>${LOG}
 status_check
 
-print_steps " Adding roboshop user"
-if [ $? -ne 0]; then
+print_steps "Adding roboshop user"
+if [ $? -ne 0 ]; then
     useradd roboshop &>>${LOG}
 fi
 status_check
 
-print_steps " Making app directory"
+print_steps "Making app directory"
 mkdir -p /app &>>${LOG}
 status_check
 
@@ -34,11 +34,11 @@ status_check
 
 cd /app 
 
-print_steps " Installing NPM"
+print_steps "Installing NPM"
 npm install &>>${LOG}
 status_check
 
-print_steps " Copying service file"
+print_steps "Copying service file"
 cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${LOG}
 status_check
 
@@ -50,11 +50,11 @@ print_steps "Enabling Catalogue"
 systemctl enable catalogue &>>${LOG}
 status_check
 
-print_steps " Starting Catalogue"
+print_steps "Starting Catalogue"
 systemctl start catalogue &>>${LOG}
 status_check
 
-print_steps " Copying Mongo repo file"
+print_steps "Copying Mongo repo file"
 cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
 status_check
 
