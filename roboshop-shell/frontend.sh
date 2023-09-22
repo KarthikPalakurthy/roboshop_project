@@ -3,10 +3,8 @@ LOG=/tmp/roboshop.log
 
 echo -e "\e[1m Installing Nginx\e[0m"
 dnf install nginx -y  &>>${LOG}
-if [ $? -eq 0]; then
-        echo -e "\e[32m Successful\e[0m"
-    else
-        echo -e "\e[32m Failure, refer to the log. log path: ${LOG}\e[0m"
+if [ $? -eq 0 ]; then
+    echo -e "\e[32m Successful\e[0m"
 fi
 
 # if [ $? -eq 0 ]; then
