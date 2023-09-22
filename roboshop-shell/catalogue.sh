@@ -1,22 +1,63 @@
-script_location=$(pwd)
-dnf install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y
-dnf install nodejs -y
-useradd roboshop
-mkdir -p /app 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip 
-rm -rf /app/*
+source common.sh
+
+print_steps "Downloading and Installing Node JS"
+dnf install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y &>>${LOG}
+status_check
+
+# dnf install nodejs -y
+
+print_steps " Adding roboshop user"
+useradd roboshop &>>${LOG}
+status_check
+
+print_steps " Making app directory"
+mkdir -p /app &>>${LOG}
+status_check
+
+print_steps "Downloading Catalogue content files"
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
+status_check
+
+print_steps "Removing Old files, if any"
+rm -rf /app/* &>>${LOG}
+status_check
+
 cd /app 
-unzip /tmp/catalogue.zip
+
+print_steps "Extracting Catalogue content"
+unzip /tmp/catalogue.zip &>>${LOG}
+status_check
+
 cd /app 
-npm install 
 
-cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service
+print_steps " Installing NPM"
+npm install &>>${LOG}
+status_check
 
-systemctl daemon-reload
-systemctl enable catalogue 
-systemctl start catalogue
+print_steps " Copying service file"
+cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${LOG}
+status_check
 
-cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongo.repo
+print_steps "Daemon reload"
+systemctl daemon-reload &>>${LOG}
+status_check
 
-dnf install mongodb-org-shell -y
-mongo --host localhost </app/schema/catalogue.js
+print_steps "Enabling Catalogue"
+systemctl enable catalogue &>>${LOG}
+status_check
+
+print_steps " Starting Catalogue"
+systemctl start catalogue &>>${LOG}
+status_check
+
+print_steps " Copying Mongo repo file"
+cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
+status_check
+
+print_steps "Installing Mongo"
+dnf install mongodb-org-shell -y &>>${LOG}
+status_check
+
+print_steps "Updating mongo host address"
+mongo --host localhost </app/schema/catalogue.js &>>${LOG}
+status_check
