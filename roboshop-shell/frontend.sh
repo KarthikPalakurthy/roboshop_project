@@ -1,8 +1,12 @@
 script_location=$(pwd)
 LOG=/tmp/roboshop.log
 
-echo -e "\e[32m Installing Nginx\e[0m"
+echo -e "\e[1m Installing Nginx\e[0m"
 dnf install nginx -y  &>>${LOG}
+if [ $? -eq 0]; then
+    echo -e "\e[32m Successful\e[0m"
+    else
+    echo -e "\e[32m Failure, refer to the log. log path: ${LOG}\e[0m"
 
 echo -e "\e[32m Removing Old files\e[0m"
 rm -rf /usr/share/nginx/html/* &>>${LOG}
