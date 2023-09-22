@@ -1,5 +1,5 @@
 script_location=$(pwd)
-LOG=/log/roboshop.log
+LOG=/tmp/roboshop.log
 
 echo -e "\e[32m Installing Nginx\e[0m"
 dnf install nginx -y  &>>${LOG}
