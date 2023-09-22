@@ -1,10 +1,12 @@
 source common.sh
 
-print_steps "Downloading and Installing Node JS"
+print_steps "Downloading Node JS"
 dnf install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y &>>${LOG}
 status_check
 
-# dnf install nodejs -y
+print_steps "Installing NodeJS"
+dnf install nodejs -y
+status_check
 
 print_steps " Adding roboshop user"
 useradd roboshop &>>${LOG}
