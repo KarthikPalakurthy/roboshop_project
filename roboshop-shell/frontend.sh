@@ -7,6 +7,7 @@ if [ $? -eq 0]; then
     echo -e "\e[32m Successful\e[0m"
     else
     echo -e "\e[32m Failure, refer to the log. log path: ${LOG}\e[0m"
+fi
 
 echo -e "\e[32m Removing Old files\e[0m"
 rm -rf /usr/share/nginx/html/* &>>${LOG}
