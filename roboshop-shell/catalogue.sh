@@ -5,11 +5,13 @@ dnf install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release
 status_check
 
 print_steps "Installing NodeJS"
-dnf install nodejs -y
+dnf install nodejs -y &>>${LOG}
 status_check
 
 print_steps " Adding roboshop user"
-useradd roboshop &>>${LOG}
+if [ $? -ne 0]; then
+    useradd roboshop &>>${LOG}
+fi
 status_check
 
 print_steps " Making app directory"
